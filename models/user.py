@@ -37,8 +37,11 @@ class UserModel (database.Model):
     login = database.Column(database.String(50))
     password = database.Column(database.String(50))
 
-    def __init__(self, user_id, login, password):
+    def __init__(self, user_id, email, name, telephone, login, password):
         self.user_id = user_id
+        self.email = email
+        self.name = name
+        self.telephone = telephone
         self.login = login
         self.password = password
 
@@ -64,8 +67,11 @@ class UserModel (database.Model):
         database.session.add(self)
         database.session.commit()
 
-    def update_user(self, user_id, login, password): 
+    def update_user(self, user_id, email, name, telephone,  login, password): 
         self.user_id = user_id
+        self.email = email
+        self.name = name
+        self.telephone = telephone
         self.login = login
         self.password = password
 

@@ -12,7 +12,7 @@ class User(Resource):
         user = UserModel.find_user_by_id(user_id)
         if user: 
             return user.json()
-        return {'message':'user not found'}, 200 # or 204
+        return {'message':'user not found'}, 204
 
     def delete(self, user_id):
         user = UserModel.find_user_by_id(user_id)
