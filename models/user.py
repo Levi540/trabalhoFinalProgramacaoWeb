@@ -1,30 +1,5 @@
 from sql_alchemy import database
 from sqlalchemy.sql.expression import func
-# from sqlalchemy_media import Image, ImageAnalyzer, ImageValidator, ImageProcessor
-
-
-# class AvatarImage(Image):
-#     __pre_processors__ = [
-#         ImageAnalyzer(),
-#         ImageValidator(
-#             minimum=(80, 80),
-#             maximum=(800, 600),
-#             min_aspect_ratio=1.2,
-#             content_types=['image/jpeg', 'image/png']
-#         ),
-#         ImageProcessor(
-#             fmt='jpeg',
-#             width=120,
-#             crop=dict(
-#                 left='10%',
-#                 top='10%',
-#                 width='80%',
-#                 height='80%',
-#             )
-#         )
-#     ]
-
-
 
 class UserModel (database.Model):
     
@@ -33,15 +8,16 @@ class UserModel (database.Model):
     email = database.Column(database.String(80))
     name = database.Column(database.String(50))
     telephone = database.Column(database.String(24))
-    # avatar = database.Column(AvatarImage.as_mutable(Json))
+    avatar = database.Column(database.String(255))
     login = database.Column(database.String(50))
     password = database.Column(database.String(50))
 
-    def __init__(self, user_id, email, name, telephone, login, password):
+    def __init__(self, user_id, email, name, telephone, avatar, login, password):
         self.user_id = user_id
         self.email = email
         self.name = name
         self.telephone = telephone
+        self.avatar = avatar
         self.login = login
         self.password = password
 
@@ -67,11 +43,12 @@ class UserModel (database.Model):
         database.session.add(self)
         database.session.commit()
 
-    def update_user(self, user_id, email, name, telephone,  login, password): 
+    def update_user(self, user_id, email, name, telephone, avatar, login, password): 
         self.user_id = user_id
         self.email = email
         self.name = name
         self.telephone = telephone
+        self.avatar = avatar
         self.login = login
         self.password = password
 

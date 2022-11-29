@@ -1,4 +1,5 @@
 from sql_alchemy import database
+from sqlalchemy.sql.expression import func
 
 class SerieModel (database.Model):
     
@@ -9,19 +10,17 @@ class SerieModel (database.Model):
     rating = database.Column(database.String(5))
     # movies = database.Column(database.Integer)
 
-    def __init__(self, id, name, season, rating, duration):
+    def __init__(self, id, name, season, rating):
         self.id = id
         self.name = name
         self.season = season
         self.rating = rating
-        self.duration = duration
 
     def json(self):
         return {'id' : self.id,
         'name' : self.name,
         'season' : self.season,
-        'rating' : self.rating,
-        'duration' : self.duration}
+        'rating' : self.rating}
 
     @classmethod  
     def find_serie_by_id(cls, id):
@@ -35,11 +34,10 @@ class SerieModel (database.Model):
         database.session.add(self)
         database.session.commit()
 
-    def update_serie(self, name, season, rating, duration): 
+    def update_serie(self, name, season, rating): 
         self.name = name
         self.season = season
         self.rating = rating
-        self.duration = duration
 
     def delete_serie(self): 
         database.session.delete(self)
@@ -48,8 +46,8 @@ class SerieModel (database.Model):
 
     @classmethod
     def find_last_serie(cls):
-        serie_id = database.engine.execute("select max('id') as new_id from movies").fetchone()
+        serie_id = database.session.query(func.max(cls.id)).one()[0]
         
         if serie_id:
-            return serie_id['new_id'] + 1
+            return serie_id + 1
         return 1

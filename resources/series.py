@@ -11,7 +11,8 @@ class Serie(Resource):
     minha_requisicao = reqparse.RequestParser()
     minha_requisicao.add_argument('name', type=str, required=True, help="name is required")
     minha_requisicao.add_argument('rating')
-
+    minha_requisicao.add_argument('season')
+    
     @jwt_required()
     def get(self, id):
         serie = SerieModel.find_serie_by_id(id)

@@ -13,12 +13,12 @@ jwt = JWTManager(app)
 DATABASE_URI = 'mysql+pymysql://root@localhost/aula?charset=utf8mb4'
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = 'Senai2022'
 
 #conexão com postgres
 # DATABASE_URI = 'postgresql+psycopg2://postgres:admin@localhost:5432/dbpython'
 # app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.config['JWT_SECRET_KEY'] = 'Senai2022'
 
 @app.before_first_request
 def create_database():

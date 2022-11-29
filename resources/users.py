@@ -22,11 +22,12 @@ class User(Resource):
         return {'message' : 'user not founded'}, 204
 
     def post(self, user_id):
+        dados = minha_requisicao.parse_args()
+
         if UserModel.find_user_by_login(dados['login']):
             return {'message':'Login {} already exists'.format(dados['login'])}, 200
 
         user_id = UserModel.find_last_user()
-        dados = minha_requisicao.parse_args()
         new_user = UserModel(user_id, **dados)
         
         try:
