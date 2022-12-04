@@ -25,9 +25,9 @@ class EpisodeModel (database.Model):
         'serieId' : self.serieId}
 
     @classmethod  
-    def find_episode_by_id(cls, id): #metodo de classe, mesmo que chamar Movie.query
+    def find_episode_by_id(cls, id):
         
-        episode = cls.query.filter_by(id = id).first() # select * from movie where id = 1
+        episode = cls.query.filter_by(id = id).first()
         if episode:
             return episode
         return None

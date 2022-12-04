@@ -3,6 +3,7 @@ from flask_restful import Api
 from resources.movies import Movies, Movie
 from resources.series import Series, Serie
 from resources.users import User, UserLogin
+from resources.episodes import Episodes, Episode
 from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
@@ -28,6 +29,8 @@ api.add_resource(Movies, '/movies')
 api.add_resource(Movie, '/movies/<int:id>')
 api.add_resource(Series, '/series')
 api.add_resource(Serie, '/series/<int:id>')
+api.add_resource(Episodes, '/episodes')
+api.add_resource(Episode, '/episodes/<int:id>')
 api.add_resource(User, '/users/<int:user_id>')
 api.add_resource(UserLogin, '/login')
 
